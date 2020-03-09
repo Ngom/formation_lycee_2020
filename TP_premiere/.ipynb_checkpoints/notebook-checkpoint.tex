@@ -1,0 +1,1227 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Correction\_et\_Notes\_TP\_1ere}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Correction du TP du second
+degré.}\label{correction-du-tp-du-second-degruxe9.}
+
+    AHMAD Farhan : Note de l'élève = 9/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import}\PY{o}{*}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ce programme peut calculer les racines d}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{un polynome du second degre}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tel que f(x) = ax²+bx+c = 0}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{a}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Entrez la valeur de a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{b}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Entrez la valeur de b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{c}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Entrez la valeur de c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{delta}\PY{o}{=}\PY{n}{b}\PY{o}{*}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{delta}\PY{p}{)} \PY{c+c1}{\PYZsh{}valeur de Delta}
+         \PY{k}{if} \PY{n}{delta} \PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ce polynome n}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{a pas de solutions reelles}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{if} \PY{n}{delta} \PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ce polynome a une seule solution reelle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{x}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{c+c1}{\PYZsh{}valeur de la solution}
+         \PY{k}{if} \PY{n}{delta} \PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Ce polynome a deux solutions reelles}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{h}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{sqrt}\PY{p}{(}\PY{n}{delta}\PY{p}{)}
+             \PY{n}{i}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{+}\PY{n}{sqrt}\PY{p}{(}\PY{n}{delta}\PY{p}{)}
+             \PY{n}{n}\PY{o}{=}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}
+             \PY{n}{x1}\PY{o}{=}\PY{n}{h}\PY{o}{/}\PY{n}{n}
+             \PY{n}{x2}\PY{o}{=}\PY{n}{i}\PY{o}{/}\PY{n}{n}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{x1}\PY{p}{)} \PY{c+c1}{\PYZsh{}valeur de la premiere solution}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{x2}\PY{p}{)} \PY{c+c1}{\PYZsh{}valeur de la seconde solution}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fin du Calcul !}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Commentaire de correction : Le programme ne tient pas de la valeur a != 0.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Ce programme peut calculer les racines d'un polynome du second degre
+Tel que f(x) = ax²+bx+c = 0
+Entrez la valeur de a1
+Entrez la valeur de b1
+Entrez la valeur de c1
+-3
+Ce polynome n'a pas de solutions reelles
+Fin du Calcul !
+
+    \end{Verbatim}
+
+    ALITOU Bilel : Note de l'élève = 9/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{o}{*}
+         \PY{n}{a}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{donner la valeur de a :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{b}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{donner la valeur de b :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{c}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{donner la valeur de c :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{k}{if} \PY{n}{a}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+             \PY{k}{if} \PY{n}{b}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{c}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tous reel est une solution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pas de solution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{la solution est :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{n}{a}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+             \PY{n}{D}\PY{o}{=}\PY{n+nb}{pow}\PY{p}{(}\PY{n}{b}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{D}\PY{p}{)}
+             \PY{k}{if} \PY{n}{D}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pas de solution dans l}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ensemble R}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{if} \PY{n}{D}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{la solution est :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+             \PY{k}{if} \PY{n}{D}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{il y a deux solutions :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{sqrt}\PY{p}{(}\PY{n}{D}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{et aussi }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{+}\PY{n}{sqrt}\PY{p}{(}\PY{n}{D}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+                 
+         \PY{c+c1}{\PYZsh{} Commentaire de correction : Le programme ne tient pas de la valeur a != 0.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+donner la valeur de a :1
+donner la valeur de b :1
+donner la valeur de c :1
+-3.0
+pas de solution dans l'ensemble R
+
+    \end{Verbatim}
+
+    ALITOU Ines : Note de l'élève = 9/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{o}{*}
+         
+         
+         \PY{k}{def} \PY{n+nf}{sol\PYZus{}degre\PYZus{}2}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{c}\PY{p}{)}\PY{p}{:}
+             \PY{n}{delta} \PY{o}{=} \PY{n}{b}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}
+             \PY{k}{if} \PY{n}{delta} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{msg} \PY{o}{=} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pas de solution réelle!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{elif} \PY{n}{delta} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{msg} \PY{o}{=} \PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{une seul solution!}\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{round(\PYZhy{}b/(2*a),2)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{x1} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b} \PY{o}{\PYZhy{}} \PY{n}{sqrt}\PY{p}{(}\PY{n}{delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}
+                 \PY{n}{x2} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b} \PY{o}{+} \PY{n}{sqrt}\PY{p}{(}\PY{n}{delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}
+                 \PY{n}{msg} \PY{o}{=} \PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Deux solution réelle }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{round(x1,2)\PYZcb{} et }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{round(x2,2)\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{return} \PY{n}{msg}
+         
+         \PY{n}{a} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Quelle est la valeur de a ?}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{b} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Quelle est la valeur de b?}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{c} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Quelle est la valeur de c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{sol\PYZus{}degre\PYZus{}2}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{c}\PY{p}{)}\PY{p}{)}
+         
+           \PY{k}{return}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Commentaire de correction : Très bien d\PYZsq{}uliser une fonction mais le programme buge si on introduit a = 0.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Quelle est la valeur de a ?1
+Quelle est la valeur de b?0
+Quelle est la valeur de c-9
+Deux solution réelle -3.0 et 3.0
+
+    \end{Verbatim}
+
+    AVCI Zeynel : Note de l'élève = 8/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{k}{def} \PY{n+nf}{sol\PYZus{}sec\PYZus{}degre}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{,}\PY{n}{c}\PY{p}{)}\PY{p}{:}
+           \PY{k}{return}\PY{p}{(}\PY{p}{)}
+         
+         
+         \PY{n}{a}\PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donnez a =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{b}\PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donnez b =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{c}\PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donnez c =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{delta} \PY{o}{=}\PY{p}{(}\PY{n}{b}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}\PY{p}{)}
+         \PY{k}{if} \PY{n}{delta} \PY{o}{\PYZgt{}}\PY{l+m+mi}{0} \PY{p}{:}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{il y}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{a deux solutions réelles distinctes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+           \PY{n}{x1}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{delta}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+           \PY{n}{x2}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{+}\PY{n}{delta}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x1=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x1}\PY{p}{)}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x2=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x2}\PY{p}{)}
+         \PY{k}{elif} \PY{n}{delta} \PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{il y}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{a une seule solution réelle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+           \PY{n}{x0} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x0=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x0}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{il n}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{y a pas de solution réelle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Commentaire de correction : Le programme ne tient pas de la valeur a = 0 et les deux première lignes}
+         \PY{c+c1}{\PYZsh{} du code sont inutiles car il n\PYZsq{}y a rien dans fonction.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Donnez a =1
+Donnez b =0
+Donnez c =-9
+il y'a deux solutions réelles distinctes
+x1= -3.0
+x2= 3.0
+
+    \end{Verbatim}
+
+    BOUCHAIN Vincent : Note de l'élèves = 9/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{o}{*}
+         
+         
+         \PY{n}{a} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Choisissez la valeur de a :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{b} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Choisissez la valeur de b :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{c} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Choisissez la valeur de c :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{eq2}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{c}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{L}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{équation est : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x² + }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x + }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{c}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{d} \PY{o}{=} \PY{p}{(}\PY{n}{b} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{l+m+mi}{4} \PY{o}{*} \PY{n}{a} \PY{o}{*} \PY{n}{c}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Delta est de }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{d}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{if} \PY{n}{d} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Il n y a pas de solution.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{elif} \PY{n}{d} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Il y a une solution :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{n} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}} \PY{n}{b}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{a}\PY{p}{)}
+                 \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{n}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Il y a deux solutions :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{n}{n} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}} \PY{n}{b} \PY{o}{\PYZhy{}} \PY{n}{sqrt}\PY{p}{(}\PY{n}{d}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{a}\PY{p}{)}
+                 \PY{n}{z} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}} \PY{n}{b} \PY{o}{+} \PY{n}{sqrt}\PY{p}{(}\PY{n}{d}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{a}\PY{p}{)}
+                 \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x1 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{n}\PY{p}{)}
+                 \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x2 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{z}\PY{p}{)}
+         \PY{n}{eq2}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{c}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Commentaire de correction : Très bien d\PYZsq{}uliser une fonction mais le programme buge si on introduit a = 0.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Choisissez la valeur de a :1
+Choisissez la valeur de b :0
+Choisissez la valeur de c :-36
+L'équation est : 1x² + 0x + -36.
+Delta est de 144.
+Il y a deux solutions :
+x1 = -6.0
+x2 = 6.0
+
+    \end{Verbatim}
+
+    BOUSSOUL Imael : Note de l'élève = 9/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import}\PY{o}{*}
+         
+         
+         
+         \PY{n}{a}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{donner la valeur de a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{b}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{donner la valeur de b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{c}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{donner la valeur de c}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{if} \PY{n}{a}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+         
+             \PY{k}{if} \PY{n}{b}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+         
+                 \PY{k}{if} \PY{n}{c}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+         
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Solution impossible dans IR}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+         
+             \PY{n}{delta} \PY{o}{=} \PY{p}{(}\PY{n}{b}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}
+         
+         \PY{k}{if} \PY{n}{delta} \PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{:}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Nadmet pas de solution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{k}{if} \PY{n}{delta} \PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Admet 2 solutions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{n}{x1} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{sqrt}\PY{p}{(}\PY{n}{delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}
+         
+             \PY{n}{x2} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{+}\PY{n}{sqrt}\PY{p}{(}\PY{n}{delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{x1}\PY{p}{,}\PY{n}{x2}\PY{p}{)}
+         
+         \PY{k}{if} \PY{n}{delta}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{il y a une seul solution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{}\PYZhy{}b/2*a}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Commentaire de correction : le programme buge si on introduit a = 0.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+donner la valeur de a0
+donner la valeur de b0
+donner la valeur de c5
+Admet 2 solutions
+-0.0 0.0
+
+    \end{Verbatim}
+
+    CEYLAN Yoyan : Note de l'élève = 9.5/10
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{o}{*}
+         \PY{n}{a}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{donner a :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{b}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{donner b :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{c}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{donner c :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{k}{if} \PY{n}{a}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+              \PY{k}{if} \PY{n}{b}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{k}{if} \PY{n}{c}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tout réel est une solution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                    \PY{k}{else}\PY{p}{:}
+                          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pas de solution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{k}{else}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{la solution est :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n}{c}\PY{o}{/}\PY{n}{b}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+               \PY{n}{d}\PY{o}{=}\PY{n+nb}{pow}\PY{p}{(}\PY{n}{b}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}
+               \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{d=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{d}\PY{p}{)}
+               \PY{k}{if} \PY{n}{d}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pas de solution dans R}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+               \PY{k}{if} \PY{n}{d}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{la solution est :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+               \PY{k}{if} \PY{n}{d}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{deux solution :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{sqrt}\PY{p}{(}\PY{n}{d}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ et }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{+}\PY{n}{sqrt}\PY{p}{(}\PY{n}{d}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+                     
+         \PY{c+c1}{\PYZsh{} Commentaire de correction : Ton code tient bien du cas a = 0 mais ne précise qu\PYZsq{}on se ramène au }
+         \PY{c+c1}{\PYZsh{} premier degré.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+donner a :0
+donner b :0
+donner c :6
+pas de solution
+
+    \end{Verbatim}
+
+    CANAI Othmane : Note de l'élève = 9/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import}\PY{o}{*} \PY{c+c1}{\PYZsh{}importer les fonctions mathématiques à utiliser}
+         \PY{c+c1}{\PYZsh{}ax\PYZca{}2+bx+c}
+         
+         \PY{n}{a} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donner la valeur de a=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{c+c1}{\PYZsh{}Valeur de a}
+         \PY{n}{b} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donner la valeur de b=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{c+c1}{\PYZsh{}Valeur de b}
+         \PY{n}{c} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donner la valeur de c=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{c+c1}{\PYZsh{}Valeur de c}
+         \PY{k}{if} \PY{n}{a} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+             \PY{k}{if} \PY{n}{b} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{c} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{La solution est impossible dans l}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{ensemble IR}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{else} \PY{p}{:}
+           \PY{n}{Delta} \PY{o}{=} \PY{n}{b}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}\PY{p}{)}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Delta=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{Delta}\PY{p}{)}
+         \PY{k}{if} \PY{p}{(}\PY{n}{Delta}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{)} \PY{p}{:}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pas de solutions réelles possibles}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{if} \PY{p}{(}\PY{n}{Delta}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{une seule solutuion possible:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+           \PY{n}{X0} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}
+           \PY{n+nb}{print}\PY{p}{(}\PY{n}{X0}\PY{p}{)}
+         \PY{k}{if} \PY{p}{(}\PY{n}{Delta}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{:}
+           \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{deux solutions réelles possibles}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+           \PY{n}{X1} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{sqrt}\PY{p}{(}\PY{n}{Delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}
+           \PY{n}{X2} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{+}\PY{n}{sqrt}\PY{p}{(}\PY{n}{Delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}
+           \PY{n+nb}{print}\PY{p}{(}\PY{n}{X1}\PY{p}{,}\PY{n}{X2}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Commentaire de correction : le programme ne tient pas compte a = 0.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Donner la valeur de a=0
+Donner la valeur de b=6
+Donner la valeur de c=3
+deux solutions réelles possibles
+-0.0 -0.0
+
+    \end{Verbatim}
+
+    CHHEM Nérilyne : Note de l'élève = 6/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{o}{*}
+         
+         \PY{n}{a}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donner la valeur de a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{b}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donner la valeur de b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{c}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donner la valeur de c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{delta}\PY{o}{=}\PY{n}{b}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{delta =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{delta}\PY{p}{)}
+         \PY{k}{if} \PY{n}{delta}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{il y a une solution reelle distincte:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} allignement des if\PYZsq{}s !}
+         \PY{k}{if} \PY{n}{delta} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{il n}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{y a pas de solution reelle}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{if} \PY{n}{delta} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{il y a 2 solutions reelles distinctes:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{+}\PY{n}{sqrt}\PY{p}{(}\PY{n}{delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{et}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{sqrt}\PY{p}{(}\PY{n}{delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+                     
+         \PY{c+c1}{\PYZsh{} Commentaire de coorection : Le code ne donne pas d\PYZsq{}informations si Delta \PYZlt{} 0 et Delta \PYZgt{} 0.}
+         \PY{c+c1}{\PYZsh{} Il ne tient pas compte également de la valeur a = 0.}
+         \PY{c+c1}{\PYZsh{} Le premier problème se règle en alignant les deux derniers \PYZdq{}if\PYZdq{}.}
+         \PY{c+c1}{\PYZsh{} Si tu importes *, tu n\PYZsq{}as besoin de \PYZdq{}math.sqrt(...)\PYZdq{}.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Donner la valeur de a1
+Donner la valeur de b0
+Donner la valeur de c-4
+delta = 16.0
+il y a 2 solutions reelles distinctes: 2.0 et -2.0
+
+    \end{Verbatim}
+
+    DELGADO Jessica : Note de l'élève = 9/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{o}{*}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{a} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donner la valeur de a: a=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{b} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donner la valeur de b: b=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{c} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donner la valeur de c: c=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Le polynôme est donnée par: P(x) =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{a} \PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x\PYZca{}2 +}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{b} \PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x +}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{c}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{Delta} \PY{o}{=} \PY{n}{b}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Delta=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{Delta}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{if} \PY{n}{Delta} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Alors, l}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{équation du polynôme admet 2 solutions réelles distinctes:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{x1} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{sqrt}\PY{p}{(}\PY{n}{Delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}
+             \PY{n}{x2} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{+}\PY{n}{sqrt}\PY{p}{(}\PY{n}{Delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x1 = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x1}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ et x2 = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x2}\PY{p}{)}
+         \PY{k}{if} \PY{n}{Delta}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Alors, l}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{équation du polynôme admet une unique solution réelle:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{n}{x0}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x0 = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x0}\PY{p}{)}
+         \PY{k}{if} \PY{n}{Delta}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Alors, l}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{équation du polynôme n}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{amet pas de solution réelle.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Commentaire de correction : Le code ne tent pas de la valeur a = 0.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+Donner la valeur de a: a=0
+Donner la valeur de b: b=4
+Donner la valeur de c: c=2
+
+Le polynôme est donnée par: P(x) = 0.0 x\^{}2 + 4.0 x + 2.0
+
+Delta= 16.0
+
+Alors, l'équation du polynôme admet 2 solutions réelles distinctes:
+x1 =  -0.0  et x2 =  0.0
+
+    \end{Verbatim}
+
+    DUFONT Fléna : Note de l'élève = 4/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{o}{*}
+         \PY{k}{def} \PY{n+nf}{equation}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{,}\PY{n}{c}\PY{p}{)}\PY{p}{:}
+             \PY{n}{delta}\PY{o}{=}\PY{p}{(}\PY{n}{b}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}\PY{p}{)}
+             \PY{k}{if} \PY{n}{delta}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{msg} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{il n}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{y a pas de solution}\PY{l+s+s2}{\PYZdq{}} \PY{c+c1}{\PYZsh{} mettre le message ici d\PYZsq{}abord !}
+                 \PY{k}{return} \PY{n}{msg} \PY{c+c1}{\PYZsh{} retourne msg après.}
+             \PY{n}{x}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{delta}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+             \PY{n}{y}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{+}\PY{n}{delta}\PY{o}{*}\PY{o}{*}\PY{l+m+mf}{0.5}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+             \PY{k}{if} \PY{n}{delta}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{k}{return}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+             \PY{k}{if} \PY{n}{delta}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{n}{x} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a} \PY{c+c1}{\PYZsh{} cette ligne d\PYZsq{}abord, sinon}
+                 \PY{k}{return}\PY{p}{(}\PY{n}{x}\PY{p}{)}  \PY{c+c1}{\PYZsh{} que contient la variable x ici ?}
+         
+         \PY{n}{a}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mettre a:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} float(input (....)) pour préciser le type réel de : a}
+         \PY{n}{b}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mettre b:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} float(input (....)) pour préciser le type réel de : b}
+         \PY{n}{c}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mettre c:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} float(input (....)) pour préciser le type réel de : c}
+         
+         \PY{c+c1}{\PYZsh{} print(equation(\PYZhy{}4,6,9)) \PYZsh{} A l\PYZsq{}appel de la fonction, mettre a, b , c pas de valeurs que les trois variables.}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{equation}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{b}\PY{p}{,}\PY{n}{c}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} comme ça !}
+         
+         \PY{c+c1}{\PYZsh{} En plus des commentaires sur code, il faut noter qu\PYZsq{}il tient pas compte de a = 0.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+mettre a:1
+mettre b:0
+mettre c:-9
+(-3.0, 3.0)
+
+    \end{Verbatim}
+
+    ETTALII Aya : Note de l'élève = 8/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{o}{*} \PY{c+c1}{\PYZsh{} line oublé dans le code mais obligatoire ! }
+         
+         \PY{n}{a}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(} \PY{n+nb}{input} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{donner a : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{b}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{donner b : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{c}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(} \PY{n+nb}{input} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{donner c : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{if} \PY{n}{a}\PY{o}{==}\PY{l+m+mi}{0} \PY{p}{:}
+             \PY{k}{if} \PY{n}{b}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{c}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Tout rel est une solution }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{il y a pas de solution }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+             \PY{k}{else}\PY{p}{:}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ la solution : }\PY{l+s+s2}{\PYZdq{}} \PY{p}{,} \PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{n}{a} \PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+             \PY{n}{DELTA}\PY{o}{=}\PY{n+nb}{pow}\PY{p}{(}\PY{n}{b}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c} 
+             \PY{k}{if} \PY{n}{DELTA}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:} 
+                 \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ il y a deux solutions : }\PY{l+s+s2}{\PYZdq{}} \PY{p}{,} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{sqrt}\PY{p}{(}\PY{n}{DELTA}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a} \PY{p}{)}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ et }\PY{l+s+s2}{\PYZdq{}} \PY{p}{,} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{+}\PY{n}{sqrt}\PY{p}{(}\PY{n}{DELTA}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)} \PY{p}{)}
+             \PY{k}{if} \PY{n}{DELTA}\PY{o}{==}\PY{l+m+mi}{0} \PY{p}{:}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ il y a une seule solution :}\PY{l+s+s2}{\PYZdq{}} \PY{p}{,} \PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+             \PY{k}{if} \PY{n}{DELTA}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0} \PY{p}{:} 
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ il y a pas de solution }\PY{l+s+s2}{\PYZdq{}} \PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Commentaire de correction : Tenir compte de la valeur a = 0 dans le programme !}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+donner a : 1
+donner b : 1
+donner c : -6
+ il y a deux solutions :  -3.0  et  2.0
+
+    \end{Verbatim}
+
+    FERGE Mélina : Note de l'élève = 9.5/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{o}{*}
+         \PY{n}{a}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{donner a=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{b}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{donner b=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{c}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{donner c=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         \PY{k}{if} \PY{n}{a}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+         	\PY{k}{if} \PY{n}{b}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+         		\PY{k}{if} \PY{n}{c}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+         			\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tout reel est une solution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         		\PY{k}{else}\PY{p}{:}
+         			\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pas de solution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         	\PY{k}{else}\PY{p}{:}
+         		\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{la solution est:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n}{c}\PY{o}{/}\PY{n}{b}\PY{p}{)}
+         \PY{k}{else}\PY{p}{:}
+         	\PY{n}{D}\PY{o}{=}\PY{n+nb}{pow}\PY{p}{(}\PY{n}{b}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}
+         	\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{D=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{D}\PY{p}{)}
+         \PY{k}{if} \PY{n}{D}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{:}
+         	\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pas de solution dans R}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{if} \PY{n}{D}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+         	\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{la solution est:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+         \PY{k}{if} \PY{n}{D}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{deux solutions:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{sqrt}\PY{p}{(}\PY{n}{D}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{et}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{+}\PY{n}{sqrt}\PY{p}{(}\PY{n}{D}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+             
+         \PY{c+c1}{\PYZsh{}La valeur de a = 0 prise en compte mais tu ne précises pas que tu passes au premier degré.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+donner a=1
+donner b=1
+donner c=-6
+D= 25.0
+deux solutions: -3.0 et 2.0
+
+    \end{Verbatim}
+
+    FREIRRA Thomas : Note de l'élève = 9/10
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import}\PY{o}{*}
+         \PY{n}{A}\PY{o}{=}\PY{n+nb}{eval}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{B}\PY{o}{=}\PY{n+nb}{eval}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{C}\PY{o}{=}\PY{n+nb}{eval}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+         \PY{n}{delta}\PY{o}{=}\PY{n}{B}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{A}\PY{o}{*}\PY{n}{C}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{delta=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{delta}\PY{p}{)}
+         \PY{k}{if} \PY{n}{delta}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{:}
+         	\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pas de solution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k}{if} \PY{n}{delta}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+         	\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{une solution}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         	\PY{n}{x}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{n}{B}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{A}\PY{p}{)}
+         	\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{x}\PY{p}{)}
+         \PY{k}{if} \PY{n}{delta}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+         	\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Deux solutions}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         	\PY{n}{x1}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{B}\PY{o}{\PYZhy{}}\PY{n}{sqrt}\PY{p}{(}\PY{n}{delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{A}\PY{p}{)}
+         	\PY{n}{x2}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{B}\PY{o}{+}\PY{n}{sqrt}\PY{p}{(}\PY{n}{delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{A}\PY{p}{)}
+         	\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x1=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{x1}\PY{p}{)}
+         	\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x2=}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{x2}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Equation Terminer avec succes!}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Commentaire de correction : Tenir compte de la valeur a = 0 dans le programme !}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+A=1
+B=0
+C=-1
+delta= 4
+Deux solutions
+x1= -1.0
+x2= 1.0
+Equation Terminer avec succes!
+
+    \end{Verbatim}
+
+    BENZAOUIA Nassim : Note de l'élève = 3/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{o}{*} \PY{c+c1}{\PYZsh{} oublié mais obligatoire !}
+          
+          \PY{n}{a} \PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{quel est la valeur de a}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} float(input (....)) pour préciser le type réel de : a}
+          \PY{n}{b} \PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{quel est la valeur de b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} float(input (....)) pour préciser le type réel de : b}
+          \PY{n}{c} \PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{quel est la valeur de c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} float(input (....)) pour préciser le type réel de : c}
+          \PY{n}{delta} \PY{o}{=}\PY{p}{(}\PY{n}{b}\PY{o}{*}\PY{n}{b}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}\PY{p}{)}
+          \PY{k}{if} \PY{n}{delta} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:} 
+          	\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pas de resolution possible dans les reels}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{k}{elif} \PY{n}{delta} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:} 
+              \PY{n}{x1} \PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b} \PY{o}{+} \PY{n}{sqrt}\PY{p}{(}\PY{n}{delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a} \PY{c+c1}{\PYZsh{} 2*a au de 2a     }
+              \PY{n}{x2} \PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b} \PY{o}{\PYZhy{}} \PY{n}{sqrt}\PY{p}{(}\PY{n}{delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a} \PY{c+c1}{\PYZsh{} 2*a au de 2a     }
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{les deux réponses sont:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x1}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{et}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x2}\PY{p}{)}
+          
+          \PY{k}{elif} \PY{n}{delta} \PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}     
+               \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{une seul réponse:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)} \PY{c+c1}{\PYZsh{} 2*a au lieu de 2a.}
+          \PY{k}{else}\PY{p}{:}
+          	\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{erreur de programmation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} En plus des commentaires sur code, il faut noter qu\PYZsq{}il tient pas compte de a = 0.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+quel est la valeur de a1
+quel est la valeur de b0
+quel est la valeur de c-4
+les deux réponses sont: 2.0 et -2.0
+
+    \end{Verbatim}
+
+    MAHIOUS Rayan : Note de l'élève = 9/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}112}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{o}{*}
+          \PY{n}{a}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{donner a:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{b}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{donner b:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{c}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{donner c:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{x1}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{p}{)}
+          \PY{n}{x2}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{p}{)}
+          \PY{n}{D}\PY{o}{=}\PY{p}{(}\PY{n}{b}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Delta=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{D}\PY{p}{)}
+          \PY{k}{if} \PY{n}{D}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{il n}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{y a pas de solution réelle.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{k}{if} \PY{n}{D}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Il y a une solution réelle :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n}{x0}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x0=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x0}\PY{p}{)}
+          \PY{k}{if} \PY{n}{D}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Il y a deux solutions réelles :}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n}{x1}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{sqrt}\PY{p}{(}\PY{n}{D}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+              \PY{n}{x2}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{+}\PY{n}{sqrt}\PY{p}{(}\PY{n}{D}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x1=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x1}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x2=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x2}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Commentaire de correction : Tenir compte de la valeur a = 0 dans le programme !}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+donner a:1
+donner b:1
+donner c:-6
+Delta= 25.0
+Il y a deux solutions réelles :
+x1= -3.0
+x2= 2.0
+
+    \end{Verbatim}
+
+    MAZOUZ Amine : Note de l'élève = 8/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}119}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{o}{*}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{soit ax**2+bx+c une fontion de degré 2 avec}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{a}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{a }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{b}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{c}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{delta}\PY{o}{=}\PY{n+nb}{int}\PY{p}{(}\PY{n}{b}\PY{o}{*}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}\PY{p}{)}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{delta vaut}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{delta}\PY{p}{)}
+          \PY{k}{if} \PY{n}{delta}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:} 
+                \PY{n}{x}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a} 
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x vaut}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x}\PY{p}{)}
+          \PY{k}{elif} \PY{n}{delta}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                  \PY{n}{x1}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{p}{(}\PY{n}{sqrt}\PY{p}{(}\PY{n}{delta}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a} 
+                  \PY{n}{x2}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{+}\PY{p}{(}\PY{n}{sqrt}\PY{p}{(}\PY{n}{delta}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a} 
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x1 et x2 vallent}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x1}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{et}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x2}\PY{p}{)}
+          \PY{k}{elif} \PY{n}{delta}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{il n}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{y a pas de solutions}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Commentaire de correction : Attention à l\PYZsq{}allignement des conditions if.}
+          \PY{c+c1}{\PYZsh{} Tenir compte de la valeur a = 0 dans le programme !}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+soit ax**2+bx+c une fontion de degré 2 avec
+a 0
+b 3
+c -6
+delta vaut 9
+x1 et x2 vallent -0.0 et 0.0
+
+    \end{Verbatim}
+
+    OUJIAD Camélia : Note de l'élève = 5/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}126}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{o}{*} \PY{c+c1}{\PYZsh{} * oublie  par l\PYZsq{}eleve mais obligatoire ici.}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n}{a}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inserer la valeur de a: a=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{b}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inserer la valeur de b: b=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{c}\PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{insererla valeur de c: c=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ce polynôme est exprimée par: P(x) =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{a} \PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x\PYZca{}2 +}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{b} \PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x +}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{c}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{=0}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n}{Delta}\PY{o}{=}\PY{n}{b}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Delta=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{Delta}\PY{p}{)}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{k}{if} \PY{n}{Delta}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+          
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Alors cette équation du polynôme admet 2 solutions réelles distinctes:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+              \PY{n}{x1}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{sqrt}\PY{p}{(}\PY{n}{Delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}
+          
+              \PY{n}{x2}\PY{o}{=}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{+}\PY{n}{sqrt}\PY{p}{(}\PY{n}{Delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}
+          
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x1 = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x1}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ et x2 = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x2}\PY{p}{)}
+          
+          \PY{k}{if} \PY{n}{Delta}\PY{o}{==}\PY{l+m+mi}{0} \PY{p}{:} \PY{c+c1}{\PYZsh{} pas de parenthèses entre Delta et == : Delta(==0)}
+          
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Alors cette equation du polynôme admet une seule et unique solution réelle:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+              \PY{n}{x0}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+          
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x0 = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x0}\PY{p}{)}
+          
+          \PY{k}{if} \PY{n}{Delta}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{:}
+          
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Alors cette equation du polynôme n}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{amet aucune solution réelle.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              
+          \PY{c+c1}{\PYZsh{} Commentaire de correction : Aucun alinéas respecté apès la condition if = problème de stucture !}
+          \PY{c+c1}{\PYZsh{} En plus des commentaires sur le code, il ne tient pas compte de la valeur a = 0.}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+inserer la valeur de a: a=0
+inserer la valeur de b: b=3
+insererla valeur de c: c=-6
+
+ce polynôme est exprimée par: P(x) = 0.0 x\^{}2 + 3.0 x + -6.0 =0
+
+Delta= 9.0
+
+Alors cette équation du polynôme admet 2 solutions réelles distinctes:
+x1 =  -0.0  et x2 =  0.0
+
+    \end{Verbatim}
+
+    TANDOUNA Nathan : Note de l'élève = 8/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}133}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{o}{*}
+          \PY{n}{a}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donner la valeur de a : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{b}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donner la valeur de b : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{c}\PY{o}{=}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donner la valeur de c : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{k}{if} \PY{n}{a}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+              \PY{k}{if} \PY{n}{b}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                  \PY{k}{if} \PY{n}{c}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                      \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Tout réel est une solution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                  \PY{k}{else}\PY{p}{:}
+                      \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Pas de solution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{k}{else}\PY{p}{:}
+              	\PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{La solution est : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{n}{a}\PY{p}{)}
+          \PY{k}{else}\PY{p}{:}
+              \PY{n}{Delta}\PY{o}{=}\PY{n+nb}{pow}\PY{p}{(}\PY{n}{b}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Delta = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{Delta}\PY{p}{)}
+              \PY{k}{if} \PY{n}{Delta}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{:}
+          	    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Il n}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{y a pas de solution dans R}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{k}{if} \PY{n}{Delta}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+          	    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{La solution est : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+              \PY{k}{if} \PY{n}{Delta}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+          	    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Deux solutions : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{sqrt}\PY{p}{(}\PY{n}{Delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ et }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{+}\PY{n}{sqrt}\PY{p}{(}\PY{n}{Delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)} \PY{c+c1}{\PYZsh{} Deux fois \PYZhy{}b là \PYZhy{}\PYZhy{}\PYZgt{} (\PYZhy{}b\PYZhy{}b+sqrt(Delta))/2*a) }
+                  
+          \PY{c+c1}{\PYZsh{} Commentaire de correction : Tenir compte de la valeur a = 0 dans le programme !}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Donner la valeur de a : 1
+Donner la valeur de b : 1
+Donner la valeur de c : -6
+Delta =  25.0
+Deux solutions :  -3.0  et  2.0
+
+    \end{Verbatim}
+
+    TASCI Mathieu : Note de l'élève = 9/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}138}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{o}{*}
+          
+          
+          \PY{n}{a} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{A = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{b} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{B = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{c} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{C = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          
+          
+          \PY{k}{def} \PY{n+nf}{equation}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{c}\PY{p}{)}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{L}\PY{l+s+s2}{\PYZsq{}}\PY{l+s+s2}{équation est : }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{a}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x² + }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x + }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{c}\PY{p}{)}
+              \PY{n}{Delta} \PY{o}{=} \PY{p}{(}\PY{n}{b} \PY{o}{*}\PY{o}{*} \PY{l+m+mi}{2}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{p}{(}\PY{l+m+mi}{4} \PY{o}{*} \PY{n}{a} \PY{o}{*} \PY{n}{c}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Delta =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{Delta}\PY{p}{)}
+              \PY{k}{if} \PY{n}{Delta} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Le discriminant est inférieur à 0, il n y a pas de solution.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{k}{elif} \PY{n}{Delta} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Le discriminant est égal à 0, il y a une solution:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                  \PY{n}{x0} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}} \PY{n}{b}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{a}\PY{p}{)}
+                  \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x0 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x0}\PY{p}{)}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Le discriminant est supérieur à 0, il y a deux solutions:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                  \PY{n}{x1} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}} \PY{n}{b} \PY{o}{\PYZhy{}} \PY{n}{sqrt}\PY{p}{(}\PY{n}{Delta}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{a}\PY{p}{)}
+                  \PY{n}{x2} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}} \PY{n}{b} \PY{o}{+} \PY{n}{sqrt}\PY{p}{(}\PY{n}{Delta}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{*} \PY{n}{a}\PY{p}{)}
+                  \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x1 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x1}\PY{p}{)}
+                  \PY{n+nb}{print} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x2 =}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{x2}\PY{p}{)}
+          \PY{n}{equation}\PY{p}{(}\PY{n}{a}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{c}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Commentaire de correction : Tenir compte de la valeur a = 0 dans le programme sinon il va buger !}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+A = 1
+B = 1
+C = -6
+L'équation est :  1 x² +  1 x +  -6
+Delta = 25
+Le discriminant est supérieur à 0, il y a deux solutions:
+x1 = -3.0
+x2 = 2.0
+
+    \end{Verbatim}
+
+    TKITEK bilel : Note de l'élève = 9/10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}144}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import}\PY{o}{*}
+          \PY{n}{a} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{definir a:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{b} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{definir b:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{n}{c} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{definir c:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          \PY{k}{if} \PY{n}{a}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:} 
+            \PY{k}{if} \PY{n}{b}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+              \PY{k}{if} \PY{n}{c}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tout reel est une solution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{k}{else}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pas de solution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:} 
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{la solution est:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{n}{a}\PY{p}{)}
+          \PY{k}{else}\PY{p}{:} 
+            \PY{n}{delta}\PY{o}{=}\PY{n}{b}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2}\PY{o}{\PYZhy{}}\PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{delta=}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{delta}\PY{p}{)}
+            \PY{k}{if} \PY{n}{delta}\PY{o}{\PYZlt{}}\PY{l+m+mi}{0}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pas de solution}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k}{if} \PY{n}{delta}\PY{o}{==}\PY{l+m+mi}{0}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{la solution est:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+            \PY{k}{if} \PY{n}{delta}\PY{o}{\PYZgt{}}\PY{l+m+mi}{0}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{deux solutions:}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{\PYZhy{}}\PY{n}{sqrt}\PY{p}{(}\PY{n}{delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{et}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{+}\PY{n}{sqrt}\PY{p}{(}\PY{n}{delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+              
+          \PY{c+c1}{\PYZsh{} Commentaire de correction : Tenir compte de la valeur a = 0 dans le programme sinon il va buger !}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+definir a:1
+definir b:1
+definir c:-6
+delta= 25.0
+deux solutions: -3.0 et 2.0
+
+    \end{Verbatim}
+
+    \section{Correction du projet rendu : TP du chapitre 1 (Second
+degré).}\label{correction-du-projet-rendu-tp-du-chapitre-1-second-degruxe9.}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{math} \PY{k}{import} \PY{o}{*}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{a} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{valeur de a = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{b} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{valeur de b = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{c} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{valeur de c = }\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{k}{if} \PY{n}{a} \PY{o}{!=} \PY{l+m+mi}{0}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Le polynôme est donné par : P(x) = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{a}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZca{}2 + }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{b}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x + (}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{c}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{Delta} \PY{o}{=} \PY{n}{b}\PY{o}{*}\PY{o}{*}\PY{l+m+mi}{2} \PY{o}{\PYZhy{}} \PY{l+m+mi}{4}\PY{o}{*}\PY{n}{a}\PY{o}{*}\PY{n}{c}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Delta = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{Delta}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k}{if} \PY{n}{Delta} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pas de solutions réelles.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{k}{elif} \PY{n}{Delta} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                \PY{n}{x\PYZus{}0} \PY{o}{=} \PY{o}{\PYZhy{}}\PY{n}{b}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Une unique soluttion.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{x\PYZus{}0 =}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{x\PYZus{}0}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Deux solutions réelles distinctes.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{x\PYZus{}1} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b} \PY{o}{\PYZhy{}} \PY{n}{sqrt}\PY{p}{(}\PY{n}{Delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+                \PY{n}{x\PYZus{}2} \PY{o}{=} \PY{p}{(}\PY{o}{\PYZhy{}}\PY{n}{b} \PY{o}{+} \PY{n}{sqrt}\PY{p}{(}\PY{n}{Delta}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{*}\PY{n}{a}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{x\PYZus{}1 = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x\PYZus{}1}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ et x\PYZus{}2 = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{x\PYZus{}2}\PY{p}{)}
+        \PY{k}{else}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{La valeur de a doit être différent de zéro.}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+valeur de a = 0
+valeur de b = 1
+valeur de c = -4
+
+La valeur de a doit être différent de zéro.
+
+    \end{Verbatim}
+
+    \section{Jeux du nombre magique (code
+amélioré)}\label{jeux-du-nombre-magique-code-amuxe9lioruxe9}
+
+    Description : Deviner le nombre magique donné par l'ordinateur entre 1
+et 20.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{k+kn}{from} \PY{n+nn}{random} \PY{k}{import} \PY{n}{randint} \PY{c+c1}{\PYZsh{} randint genere aleatoirement un nombre entier }
+        
+        \PY{n}{magic\PYZus{}number} \PY{o}{=} \PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{)} \PY{c+c1}{\PYZsh{} Donner un entier au hasard entre 1 et 20.}
+        \PY{n}{guess\PYZus{}number} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Devine le nombre magic ? }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ magic\PYZus{}number = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        \PY{k}{while} \PY{n}{guess\PYZus{}number} \PY{o}{!=} \PY{n}{magic\PYZus{}number} \PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ Ouppps !!!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{k}{if} \PY{n}{magic\PYZus{}number} \PY{o}{\PYZlt{}}\PY{o}{=} \PY{n}{guess\PYZus{}number} \PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donne une valeur plus petie ?}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n}{guess\PYZus{}number} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Devine encore ? }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ magic\PYZus{}number = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+            \PY{k}{else}\PY{p}{:}
+                \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Donne une valeur plus grande ?}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n}{guess\PYZus{}number} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{input}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Devine encore ? }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{ magic\PYZus{}number = }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
